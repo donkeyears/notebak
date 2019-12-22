@@ -32,7 +32,7 @@ const char* 变成char* 很难。需要cast
 
 | 目标⬇️源头➡️           | string a="hi"                            | char* b="hi" | const char* c="hi"   | char d []="hi" |
 | -------------------- | ---------------------------------------- | ------------ | -------------------- | -------------- |
-| string a             | NULL                                     | a=b          | a=c                  | a=b            |
+| string a             | NULL                                     | a=b          | a=c                  | a=d            |
 | Char* b              | c=a.c_str  b=b=const_cast<char*>c        | NULL         | b=const_cast<char*>c | b=d            |
 | const char* c        | c=a.c_str()  c=a.data() a.copy(c,size,0) | c=b          | NULL                 | c=d            |
 | char d []  const指针 | strcpy()                                 | strcpy       | strcpy               | NULL           |
