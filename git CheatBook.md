@@ -53,3 +53,25 @@ $ git rebase -i commitid # 是合并commitid之后的所有提交。
 
 ```
 
+## git 多个远程仓库
+
+有时候，可能多个git仓库基于同一个基础。但是往不同的地方push。比如repo a b都要push。这时候我们就要添加多个remote。
+
+remote代表了远程的repo。默认来下来的代码为origin。所以我们命令都是
+
+```bash
+git pull origin master:tmp
+```
+
+实际我们可以添加多个remote。
+
+```bash
+git remote add remoteName url # 这儿添加了新的repo。但还要pull才能更新repo分支。
+```
+
+但是假设我在repo A修改。repo B还没有拉代码。此时我直接git pull originb branch1. 这时候来回来的代码会和repoA的当前分支自动进行merge。这样就会有很多冲突。解决办法，用fetch
+
+```bash
+git fetch remoteName remotebranchA:localbranchA  # 远程拉过来新建分支，但不合本分支合并。
+```
+
