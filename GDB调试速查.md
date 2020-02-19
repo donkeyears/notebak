@@ -198,6 +198,10 @@ run之前可以：
   >
   > disable/enable/info display
 
+- 打印时长度限制
+
+  - 有时在gdb里打印，会有长度限制，此时可以通过 set print elements 0 取消长度限制。
+
 ### 设置显示项 略
 
 ### GDB环境变量 略

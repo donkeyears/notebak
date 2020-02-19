@@ -1,4 +1,8 @@
-# python note
+[TOC]
+
+
+
+# python basic
 
 ## 1. 基本数据结构
 
@@ -169,7 +173,7 @@ range
 
 ```bash
 1. range(stop) range(10)区间[0,10)
-rangee(start,stop,step)
+range(start,stop,step)
 
 2. word = "abcde"
 for item in enumerate(words) ：
@@ -276,3 +280,263 @@ G:Globals
 B:built in type
 
 LEGB的顺序进行执行。
+
+# object programing
+
+```python
+class Dog():
+    specials = 'a' # 类的变量。初始化函数是类的实例的变量
+    def __init__ (self, param1=0,param2):# self为关键字 __init__ 为固定初始化函数
+        self.param1 = param1
+        self.param2 = param2
+        pass
+my_obj = Dog(param1='1',param2) # 此处必须带上参数。
+# python方法里必须带上 self这个实例的指向。当然如果为了可读性 self.param1 也可以用类名代替self。
+
+class DogSon(Dog):   # 继承类。子类需要显示调用父类初始化函数
+    def __init__(self):
+        Dog.__init__(self)
+        pass
+    def __str__(self):  #特殊函数，是实现基础类的函数 如 print,len print实际就是str类名。
+    	pass
+    
+raise NotImplementedError(" error this need impl in son class") #父类定义子类必须重写
+```
+
+关键：类标识符，类成员变量，成员变量，初始化方法，普通方法，特殊方法，继承与覆盖。
+
+特殊函数：在类中定义一些
+
+# 模块和包
+
+```python
+pip install requsts
+from requests import A
+```
+
+模块module就是可调用的py文件，包packag就是module的集合
+
+自己建立package。
+
+```
+同目录下 a.py有方法x；  mypkg目录下 __init__.py b.py 方法y ； mypkg目录下mysubpkg目录有 __init__.py c.py 方法z .
+没有文件夹直接from文件，有了文件夹+__init__.py from目录。
+from a import x
+from mypkg import b
+from mypkg.mysubpkg import c 
+x
+b.y
+c.z
+```
+
+
+
+```
+__main__ __name__
+
+if __name__ == "__main__"  # 用来判断是import进来还是直接run py文件。如果直接run __name__ 会被赋值 为__main__
+```
+
+# 错误和异常处理
+
+```python
+try:
+    result = 10+10
+expection:
+    print("error")
+else:
+    print("no error")
+finally:
+    print("will rrun into this at all condition.")
+```
+
+## 单元测试
+
+### pylint
+
+```
+pip install pylint
+```
+
+pylint 会检查一些语法错误。
+
+### unit testing
+
+```python
+import unittest
+import sourvefile
+
+class mytest(unittest.TestCase):
+    def first_test(self):
+        self.assertEqual(a,b)
+```
+
+# decorators
+
+python 可以return一个函数名。也可以在函数里边定义新的函数。
+
+定义decorators， decorators传入待修饰函数，进行处理。
+
+在带修饰函数前加上特殊符号，进行修饰，如果不需要了。就注释掉即可。
+
+```python
+def new_decorator(fun_need_decorat):
+    def warp():
+        # some code before fun_need_decorat
+        fun_need_decorat()
+        # some code
+    return warp
+
+@new_decorator
+def myfun:
+    print("fun need decoratee")
+    
+```
+
+# generator
+
+在需要一个较大的list的时候。如果我们每次都完全生成结束再用，可能会消耗过多的内存。所以可以用generator一次次生成。
+
+generator关键是利用yield关键字，每次都从上一次的结果继续运行for循环。一次只保存上一次的值，和步进，可以省内存。
+
+```python
+def gen_fib(n):
+    a = 1
+    b = 1
+    for i in range(n):
+        yield a
+        a,b = b,a+b
+for i in gen_fib(n):
+    print(i)
+#关键每次调用都回到yield关键字处，继续执行下去。而不是一次性走完。
+s= 'hello'
+iter_s = iter(s) # 会把s按照 generator顺序依次拆开。
+```
+
+# advanced python module.
+
+## 
+
+```python
+#Counter
+from collections import Counter
+c = Counter(list_test)
+# 统计list中重复的数量，并支持一些新的函数。详情见notebook
+
+
+# Defaultdict
+from collections import Defaultdict
+d = {"k1":1,"k2":2}
+dd = defaultdict(object)
+ddd = defaultdict(lambda: 0)
+# 为每一个key指定默认值。
+
+# OrderedDict
+# 日常dict元素没有顺序。这个OrderedDict里元素按照存入的顺序保存。顺序固定。
+
+# namedtuple
+Dog = namedtuple('Dog','name age sex') # 可以快速定义一个类，并有其中几个参数。
+
+# datetime
+
+import datetime
+
+datetime.time(5,12,04)
+datetime.date()
+```
+
+## pdb
+
+```python
+import pdb
+
+pdb.set_trace() #在这一行设置断点。
+```
+
+##  timeit
+
+```python
+import timeit
+timeit.timeit("code ",number=1000)
+
+%timeit  yourcode
+```
+
+## StringIO
+
+```python
+import StringIO
+```
+
+## Regulation expression
+
+```python
+import re
+match = re.search(pattern, text)
+如果找到了，返回一个正则object。如果没有返回none
+re.split(split_iteem, text) # 返回一个list。切割开的结果
+re.findall(pattern, text)
+```
+
+# advanced python object
+
+```
+abs(-1) =1
+pow(2,3,4) = 2**3%4
+hex(10) = 0xa
+round(3.9) 
+round(3.1415, 2)
+
+
+
+
+s = 'hhello world'
+s.capitalize()
+
+s= set()
+s.add()
+s.clear()
+s.copy()
+s.difference(setb)
+
+
+
+```
+
+# GUI
+
+```python
+from ipywidgets from interactive interactive fixed
+import ipywidgets as widgets
+
+@interact(x = True, y=1)
+def g(x,y):
+    return (x,y)
+
+
+#interact 可以出现一个交互界面。作为generator修饰函数g
+
+interact(x = True, y=widgets.IntSlider(min,max,step...))
+
+list 在interact里变成下拉框了。
+
+create two widgets， link them
+a=widgets.FloatText()
+b= widgets.FloatSlider()
+display(a,b)
+mylink = widgets.jslink((a,'value'),(b,'value'))
+widgets 联系了输入和内部程序，控制UI显示。
+layout style
+```
+
+
+
+# python usage
+
+# data analysis
+
+numpy，pandas
+
+## data visualization
+
+matplotlib，seaborn
