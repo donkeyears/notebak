@@ -50,6 +50,13 @@ make install
 #vim folder introduction.https://www.cnblogs.com/chris-cp/p/4581593.html
 
 
+
+# Mac os 
+brew install vim  fzf sdl2 global 
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+pip install pysdl2-dll # need by vim-keysound.  brew install sdl2
+
+
 ~/.vim/autoload load when you need.  ~/.vim/plugin load eachtime vim start.
 # install vim-plug, a useful plugin manager.  article about vim-plug  https://linux.cn/article-9751-1.html
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -60,6 +67,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.c
 
 " edit plugin "
 call plug#begin('~/.vim/plugged')
+Plug 'vim/killersheep'
 Plug 'skywind3000/vim-keysound' "depend on python-sdl2  "
 Plug 'skywind3000/asyncrun.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -78,7 +86,11 @@ let g:asyncrun_bell = 1
 " 设置 F10 打开/关闭 Quickfix 窗口"
 nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
 
-
+nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
+nnoremap <silent> <F9> :AsyncRun gcc -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+nnoremap <c-p> : Files<cr>
+nnoremap <c-;> : Gtags 
+nnoremap <c-r> : Gtags -r
 
 
 " config vim-keysound"
@@ -136,7 +148,6 @@ set incsearch
 set smartcase
 
 set spell spelllang=en_us
-
 
 
 
