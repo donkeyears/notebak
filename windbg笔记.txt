@@ -1,0 +1,58 @@
+﻿windbg
+调试过程中需要添加符号服务器地址。在webex中这样添加  srv*c:\sym*http://10.194.242.175/daily/;srv*c:\sym*http://10.194.242.175/er;srv* 也可以环境变量设置，但是有时会出错。最后的一个srv*就是默认链接微软的服务器。
+
+
+
+
+app verifer  在开会过程中进行验证内存的泄露。
+首先打开webex下载，然后windbg attach上去，运行，此时atmgr的进程正在下载文件，等到下载完毕，在attach上去，继续。
+http://www.cnblogs.com/vivilisa/archive/2010/01/07/1641555.html
+
+
+
+0:000> !wow64exts.sw
+!analyze -v   分析core dump文件，因为core并不一定意味着会有问题，这只是分析问题。
+.ecxr repair some core dump file
+kPn
+
+kb 显示函数前三个参数。
+
+dd 13c071e8  显示内存
+
+ dt 13c071e8 MCS_Port  按照类型显示  display type
+ dv 								display local vari
+ dx -r1 (lll*)0x...
+
+lm 查看加载的模块。
+
+  dds 0x0c1221b0  显示虚函数表。
+
+r
+
+.ecxr display Exception Context Record
+
+.cxr 0024db78 
+
+uf atarm!MCS_Port::lock
+
+u atarm!MCS_Port::lock
+
+.frame 0n1;dv /t /v
+
+
+
+如果遇到了看似堆栈没有异常，但是有excetpion report。可能因为异常堆栈深度比较大，可以按照以下方式查看。
+~* kb查看所有线程看看有没有异常
+dds esp esp+500 当前进程往下500个。从里头找异常。防止堆栈在很远的地方。
+dd 002ad5c0 找到报告exception的地方，附近很有可能就是出crash的地方。
+0:000> dd 002ad5c0
+002ad5c0  002ad6c0 002ad6dc 77950ef8 00000001
+002ad5d0  0079dda2 002ad5f8 77946d79 fffffffe
+002ad5e0  002af90c 002ad6dc 002ad694 002adc04
+002ad5f0  77946d8d 002af90c 002ad6a8 77946d4b
+002ad600  002ad6c0 002af90c 002ad6dc 002ad694
+002ad610  7791e195 00000000 002ad6c0 002af90c
+002ad620  7791fa17 002ad6c0 002af90c 002ad6dc
+002ad630  002ad694 7791e195 46080160 002ad6c0
+.cxr 002ad6dc 这个值正好在5c0旁边。所以容易发现问题所在。
+凭运气

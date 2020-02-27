@@ -1,0 +1,24 @@
+sip 协议
+
+
+UAS UAC
+SIP协议采用Client/Server模型。每一个请求（Request）触发服务器的一个操作；每个操作被称为方法（Method）；每个请求除了指明具体方法外，还携带了一系列的头域（Header field）,这些头域携带了各种业务信息；除了头域外，消息中还可以携带任意类型的消息体（Body），呼叫中最常使用的SDP信息就是通过消息体在Client和Server之间传递的。Server从接收到请求到处理完毕，要回复多个临时响应(Response)，和一个终结响应(Response)，终结响应有且只有一个。
+请求和他的所有响应构成一个事务（Transaction），一个完整的呼叫过程包含多个事务，比如呼叫建立和呼叫释放就是
+两个相互独立的事务。
+用户代理（User Agent）是发起或者接收呼叫的逻辑实体。 
+用户代理客户端-UAC（User Agent Client），用于发起请求；
+用户代理服务器-UAS（User Agent Server），用于接收请求。UAC/UAS的划分是针对一个事务的。在一个呼叫中的多个事务里，UAC和UAS的角色是可以互换的。例如在A和B的呼叫中，A向B发起呼叫，在呼叫建立的事务中，A是UAC，B是UAS；呼叫结束时，B先挂机，在呼叫释放的事务中，B是UAC，A是UAS。换句话说，每个一般的UA都是UAS和UAC的结合体。
+UA的实际物理形态有：IP Phone，SoftPhone，GateWay......
+Proxy Server作为一个网络逻辑实体代理客户端转发请求或者响应；同Proxy Server类似的还有一种设备是B2BUA，
+顾名思义，就是背背的两个UA组成的一个逻辑实体，它作为UAS终结一个事务，同时作为UAC发起另外一个事务。Proxy Server同B2BUA相比，Proxy Server是一个事务传递过程中的中间节点，而B2BUA将一个事务转变成另一个事务。
+在SIP组网中还包括Location Server、Registrar、Redirect Server，分别负责维护地址映射表，注册管理，呼叫重定向。他们和Proxy Server 可以在同一台设备上也可以运行于不同的设备上。SIP Server是Proxy Server、Location Server、Registrar、Redirect Server的总称。
+SIP Server采用B2BUA模型。接受请求端为UAS端，代理转发或主动发起请求端为UAC端，整个SIPServr为UAC/UAS的组合体。通过UAC/UAS之间消息交互完成会话的建立、改变、结束的阶段。SIP Server协助网关交换媒体信息，
+但不参与会话建立后媒体流传输。
+
+
+
+Sip 几个重要参数： 
+1) 如下三个值相同代表同一个dailog（会话） 
+Call-id From（tag） To （tag） 
+2）branch值相同，代表同一个 transaction(事务) Branch 
+3）cseq Cseq 其生存域是一个会话。 

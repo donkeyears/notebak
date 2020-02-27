@@ -1,0 +1,52 @@
+mac学习
+
+
+安装homebrew。类似linux 包管理器 homebrew。ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)
+
+软件是装在/application目录下。一般下载后拖进去就可以了。在别的目录也可以运行，但是有时读写权限问题。比如vscode。
+
+按键command 类似于ctrl。 option类似alt。
+不同应用不同输入法。系统偏好设置—键盘—输入源—自动切换到文档的输入源。
+系统偏好设置-用户群组-登陆项 开机自启动，snipaste
+
+优点：
+1.运行速度是真快。估计是ssd顶级吧，据说3G/s？内存还大。不过虚拟机开了站内存太狠了。
+2.屏幕好？
+3.类unix终端？
+
+不满意的地方。开始注册账号必须要银行卡，可真是坑到家了，系统设计烂到家，我不想绑定银行卡，连个报错都没有，加了银行卡，验证码短信又发不出来。非得打电话人工服务给我重置。这样的事不能给个错误提示么。
+1.快捷键感觉有些乱，ctrl按习惯了
+2.同程序不同窗口切换太麻烦了。底层docker 不能像windows一样切换，
+3.全局文件查找还不好，alfred还在学习中。或许可以改善。
+4.双屏后docker竟然切换到外接显示器了。还把全屏的应用盖住了。这难道不是bug吗？
+5.shift 不能切换中英文。  长按caps lock锁定大写。cpas短按为中英。
+6.终端不能自动复制。右键粘贴。iterm有
+7.键盘烂是真的。
+8.菜单栏为何都在嘴上边？好麻烦。。
+9.docker底部会变大小，但是变小了后程序下边为何不变？
+10. 很多目录finder 进不去？command shift g输入目录；command up上层目录。
+11.剪切文件？
+
+
+sublime 配置，按键	
+	{ "keys": ["super+;"], "command": "show_overlay", "args": {"overlay": "goto", "text": "#"} },
+	{ "keys": ["super+g"], "command": "show_overlay", "args": {"overlay": "goto", "text": ":"} },
+因为熟悉windows下ctrl p文件 r@方法，;#符号，g行号的跳转。在mac下跳转到行用了control按键。比较反常。所以切换了下。
+搜索command+f，全局搜索coammand shift f。替换command option f。这个和其他的ctrl h有些不同。反人类啊。
+显示一行过长自动换行。word warp
+多屏 alt+shift+12... mac option command 2.。。
+sublime精髓在于goto anywhere。其次ctrl d多编辑，然后跳转定义引用。还有优秀内存性能。
+
+vscode目前感觉优点：
+1.全局搜索符号好快啊。sublime单文件方便，但是全局麻烦。
+2.自动补全在装了插件后感觉很舒服。这个待定
+3.左侧五个图标还是挺有用。git目前感觉一般，还是熟悉命令行多些。
+4.debug等功能还没有体验，估计要配置
+5. 插件或许是个大方向。
+配置是以json覆盖的方式。workspace级别>user级别>default
+配置
+/Library/Application Support/Code/User/setting.json
+    "workbench.editor.enablePreview": false,
+    "editor.wordWrap": "on",
+    "editor.renderWhitespace": "all"
+

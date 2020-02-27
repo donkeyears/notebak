@@ -1,0 +1,116 @@
+windows下修改 C:\Program Files\Git\etc\profile.d\aliases.sh
+
+#PS1
+#借鉴于https://imtx.me/archives/1298.html  在线生成 http://ezprompt.net/
+# git status output get last 1 line. if clean, print *
+function parse_git_dirty {
+  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+}
+#output feature name and status
+function parse_git_branch {
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1$(parse_git_dirty))/" -e "s/feature/f/" -e"s/gate/g/"
+}
+# export PS1='\[\033[32m\]\u \t \[\033[34m\]\W\[\033[31m\] $(parse_git_branch)\[\033[00m\]$ '
+# zhen 08:55:31 webex-eureka (f/f7865*) $
+PS1='\[\033[01;32m\]\u \t \[\033[01;34m\]\W `b=$(parse_git_branch); if [ x"$b" != "x" ]; then echo -n -e "\[\e[33;40m\]$b\[\033[01;32m\]\[\e[00m\]"; fi`\[\033[01;34m\] $ \[\e[00m\]'
+
+#┌09:29:30
+#┌zhen@webex-eureka (f/f7865*)
+#┌ 魏震❄$
+
+dn=$(ls -l | grep ^d | wc -l);fn=$(expr $(ls | wc -l) - ${dn})
+PS1='\342\224\214\[\033[01;32m\]\t \n\
+\342\224\214\[\033[01;34m\]\u@\W `b=$(parse_git_branch);dn=$(ls -l | grep ^d | wc -l);fn=$(expr $(ls | wc -l) - ${dn}); if [ x"$b" != "x" ]; then echo -n -e "\[\e[33;40m\]$b$dn$fn\[\033[01;32m\]\[\e[00m\]"; fi` \n\
+\342\224\214\[\033[01;34m\] \360\237\221\275$ \[\e[00m\]'
+
+
+
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+fi
+
+# User specific aliases and functions
+~
+
+export LSCOLORS=exfxcxdxbxegedabagacad#不同背景颜色应该不一样
+
+alias ll='ls -lht' #按修改时间逆序列出文件
+alias la='ls -lhta' #按修改时间逆序列出所有文件
+alias size='f(){ du -sh $1* | sort -hr; }; f'
+# fast cd
+alias core="cd /data/coredump"
+alias work="cd /data/zhen"
+alias erk="cd /data/zhen/webex-eureka"
+alias tpgw="cd /data/zhen/webex-eureka-tpgw/src/tpgw"
+alias com="cd /data/zhen/webex-eureka-common"
+
+alias h="history "
+alias tptmp=" >tmp/tmp.log 2>&1 "
+alias vitmp=" vi tmp/tmp.log "
+#alias grep=" grep --color=auto "
+
+alias gst="git status "
+alias ga="git add "
+alias gau="git add -u "
+alias gcm="git commit -m "
+alias grst="git reset --hard "
+alias glg="git log -10 --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit  "
+alias glgfull="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit  "
+alias gl="git log --graph --oneline --decorate "
+
+alias gbr="git branch " 
+alias gck="git checkout "
+alias gckb="git checkout -b "
+
+alias gpl="git pull "
+alias gps="git push "
+alias gmg="git merge " 
+
+alias gcl="git clone "
+alias gclerk="git clone ssh://git@bitbucket-eng-chn-sjc1.cisco.com:7999/cctgfork/webex-eureka.git "
+alias gcltp="git clone ssh://git@bitbucket-eng-chn-sjc1.cisco.com:7999/cctgfork/webex-eureka-tpgw.git "
+alias gclcom="git clone ssh://git@bitbucket-eng-chn-sjc1.cisco.com:7999/cctgfork/webex-eureka-common.git "
+
+
+
+
+
+
+
+alias gclerk="git clone https://zhenwe@bitbucket-eng-chn-sjc1.cisco.com/bitbucket/scm/cctgfork/webex-eureka.git "
+alias gcltp="git clone https://zhenwe@bitbucket-eng-chn-sjc1.cisco.com/bitbucket/scm/cctgfork/webex-eureka-tpgw.git "
+alias gclcom="git clone https://zhenwe@bitbucket-eng-chn-sjc1.cisco.com/bitbucket/scm/cctgfork/webex-eureka-common.git "
+
+彩色输出，借用文中下边三个第一个。
+作者：猴子下山写代码
+链接：https://www.jianshu.com/p/f0580c893dc4
+來源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+git log
+
+git add file
+
+git rebase -i  b73f6a89     合并这个提交前的所有提交。第一个编辑界面第一行留pick。剩下的行改为s。这样保存，第二次输入commit 信息。
+
+
+log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+
+
+
+PS1 设置
+function parse_git_dirty {
+  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+}
+function parse_git_branch {
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1$(parse_git_dirty))/"
+}
+# export PS1='\[\033[32m\]\u \[\033[34m\]\w\[\033[31m\] $(parse_git_branch)\[\033[00m\]$ '
+export PS1='`a=$?;if [ $a -ne 0 ]; then echo -n -e "\[\e[01;32;41m\]{$a}"; fi`\[\033[01;32m\]\u \[\033[01;34m\]\w `b=$(parse_git_branch); if [ x"$b" != "x" ]; then echo -n -e "\[\e[33;40m\](branch:$b)\[\033[01;32m\]\[\e[00m\]"; fi`\[\033[01;34m\] $ \[\e[00m\]'
+
+
+
+
