@@ -1,0 +1,120 @@
+网络基础 na
+
+iou模拟器
+
+两层做交换，三层做路由
+
+1.路由设备 
+接入交换，汇聚层做路由策略。
+ 
+ 分层分块。三层园区网，1，核心层 core。2.汇聚层aggrgato 3.接入层 access layer  会有一部分 过滤策略，限速
+ 
+ 汇聚层性能要求高些。接入层性能低，比如百兆。汇聚层转发能力大，端口密度小，但贷款大。都千万兆。qos，配置策略要高。默认网关放在这层
+
+ 核心层，体系结构，双核心，怕单点故障。成本高，但稳定性高。
+ 
+2. 交换机
+
+
+r router
+sw switch
+
+
+console口 rs232异步口。与pc usb转db9的口接上。
+端口软件serial  波特率默认9600.8 0 1 next connect
+
+拆箱上电。绿口与pc连。以太网10兆。fast 100兆。
+15个级别。1或15最常用。
+enable 到15
+再到配置模式  config terminal
+注意最后加一句 noshutdown。默认是关的，否则容易连不上。
+
+ping测试。也可以ping自己。
+en 
+config 特然
+host r4
+inter 
+ip address..网络 掩码.. 
+noshutdown exit
+
+ping 
+
+路由设备左右网络不一样。
+
+
+加固设备。telnet ssh协议来远程配置。
+config ter 
+line vty 0 4   vty ip访问的终端个数。line逻辑连接。
+pass
+ip int brief 查验。
+telnet ....ip地址。
+
+telnet用户级别进入高级别时候需要enable15 访问密码。在console线上。enable secret 密码
+
+write memory /copy running config 
+
+
+
+
+
+
+
+
+
+
+
+
+
+交换机
+背板交换能力很重要。
+
+vlan
+同一台交换机用多个网段的。防止泛洪影响其他的网段。用vlan分开。正跳线，反跳线
+
+网关地址就是路由器地址。
+多网段由路由器分开。
+
+
+
+
+access trunk  hybrid（思科不如华三等。）
+一个端口，一个vlan 是access
+
+trunk 一个物理端口承载多个vlan。复用  帧有tag区分不同vlan 12 802.1.q trunk 上传帧。tag只在trunk端口上用来区分vlan.  
+
+single armed routing
+路由器trunk方式。
+
+
+vtp 动态配置vlan减少工作量
+
+stp 生成树协议。很重要。防止成环后   广播帧泛洪  协议自动断开某个环的端口
+
+nh next hop
+
+静态路由 。
+
+动态路由
+
+掩码求子网号。反掩码则是求网的范围。、
+0.0.12.0 两个1所以二的二，四个。
+0.0.0.0 一个网
+
+
+
+ipv6 八块。每块16位，用冒号分开。前四十八位。如2001:0107:0304：： /48 两个冒号为全0
+企业为48位，工程师分为64位。
+
+127.0.0.1分给了协议栈用。
+ipv6测试为::
+
+
+ipv4 单播 组播 广播 v6没有广播。添加任播。就近。
+
+
+公有ip
+
+
+
+
+
