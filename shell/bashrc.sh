@@ -25,6 +25,23 @@ alias gcl="git clone "
 
 
 
+# user define
+source ~/.z.sh
+# User specific aliases and functions
+#~
+# git status output get last 1 line. if clean, print *
+function parse_git_dirty {
+  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+}
+#output feature name and status
+function parse_git_branch {
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1$(parse_git_dirty))/" -e "s/feature/f/" -e"s/gate/g/"
+}
+# export PS1='\[\033[32m\]\u \t \[\033[34m\]\W\[\033[31m\] $(parse_git_branch)\[\033[00m\]$ '
+PS1='\[\033[01;32m\]\u \t \[\033[01;34m\]\W `b=$(parse_git_branch); if [ x"$b" != "x" ]; then echo -n -e "\[\e[33;40m\]$b\[\033[01;32m\]\[\e[00m\]"; fi`\[\033[01;34m\] $ \[\e[00m\]'
+
+
+
 
 # use expect to login a server 
 #!/usr/bin/expect 
