@@ -29,6 +29,6 @@ github repo。awsome cheetsheet；
 nsfw-data-scrapper
 Complete-Python-3-Bootcamp
 
-vscode plugin：  bracket pair color; c++; gitlens; incdent rainbow; 
+vscode plugin：  bracket pair color; c++; gitlens; incdent rainbow; sftp； vim； 
 
 
