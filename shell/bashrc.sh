@@ -1,3 +1,7 @@
+
+alias fv="vim \$(fzf) "
+
+alias fresh="source ~/.bash_profile "
 alias zl="z -l"
 alias h="history 20"
 #alias tptmp=" >tmp/tmp.log 2>&1 "
@@ -23,6 +27,13 @@ alias gmg="git merge "
 
 alias gcl="git clone "
 
+alias vizhenrc="vi ~/.zhen.rc"
+alias virc="vi ~/.bash_profile"
+alias srcrc="source ~/.bash_profile"
+
+
+
+eval "$(lua /Users/wz/Documents/github/z.lua/z.lua --init bash)"
 
 
 # user define
