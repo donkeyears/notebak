@@ -33,6 +33,16 @@ a[-1] 从末尾往前走。这儿为‘d'.
 
 比如a='hello' a[0]='i'会报错。因为a不可以被更改
 
+## name object
+
+name=object
+
+object属性： 1. 标识，唯一不可变，id(a) 2.  类型，不可变，3. 值，可变或不可变。
+
+name，只是一个别名，与object关联
+
+a=list[0] 返回list 0位置reference的一个object。别名a
+
 ### 字符串加减乘除。
 
 a=‘z'  a*2为'zz'
@@ -48,7 +58,7 @@ x='python'; x.upper(); x.lower();x.split('i')用i分隔开
 1. %d c语言方式；2. format函数，3. f string
 
 ```python
-print("hello %s" % "world")
+print("hello %s" % "world") # 用%链接。逗号不会解析。
 print("hello {}".format("world"))
 print("hello {1}".format('asdf',"world"))
 print("hello {w}".format('asdf',w="world"))
@@ -192,7 +202,7 @@ a in "a world" True
 
 6. from random import
 
-7. result = input(" input the num ")   type(result) 是string这点要注意###
+7. result = input(" input the num ")   type(result) 是string这点要注意### 可以转换type后在使用。
 ```
 
 ### list comperhensive
@@ -217,6 +227,8 @@ mylist = [x*y for x in listx for y in listy]
 ## 函数方法
 
 类智能推荐函数，.+tab 参数介绍，tab+shift。 help函数可以输出文档。类似man
+
+返回值直接在里边return即可。
 
 ```python
 def my_fun(param1 ,param2=defaultvaluue):
@@ -312,6 +324,7 @@ raise NotImplementedError(" error this need impl in son class") #父类定义子
 ```python
 pip install requsts
 from requests import A
+import abcdefg as abc  # short name for easy to use.
 ```
 
 模块module就是可调用的py文件，包packag就是module的集合
