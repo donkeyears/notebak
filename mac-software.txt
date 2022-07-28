@@ -1,0 +1,29 @@
+wechat
+qq
+snipaste
+chrome 
+office
+vscode 
+sublime
+typora
+iterm2
+android studio
+aconada
+source tree
+wireshark
+vnc
+clash
+edge
+tencent lemon 
+imazing
+
+
+
+video: iina  vqanalyzer vlc obs
+
+
+android software
+snapdragon profiler
+agi
+perf dog
+

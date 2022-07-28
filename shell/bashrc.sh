@@ -1,5 +1,5 @@
-
-alias fv="vim \$(fzf) "
+alias vf="vim \$(fzf) "
+alias cf="cd \$(dirname \$(fzf))"
 
 alias fresh="source ~/.bash_profile "
 alias zl="z -l"
@@ -7,6 +7,7 @@ alias h="history 20"
 #alias tptmp=" >tmp/tmp.log 2>&1 "
 #alias vitmp=" vi tmp/tmp.log "
 alias grep=" grep --color=auto "
+alias ll="ls -alF"
 
 alias gst="git status "
 alias ga="git add "
@@ -31,10 +32,10 @@ alias vizhenrc="vi ~/.zhen.rc"
 alias virc="vi ~/.bash_profile"
 alias srcrc="source ~/.bash_profile"
 
+alias mydocker="ssh -p 21609  wei@cn-zj-dx-2.sakurafrp.com "
 
 
 eval "$(lua /Users/wz/Documents/github/z.lua/z.lua --init bash)"
-
 
 # user define
 source ~/.z.sh
